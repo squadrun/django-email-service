@@ -44,6 +44,9 @@ class MailjetEmailProvider(AbstractEmailProvider):
             message["TemplateLanguage"] = True
             message["Variables"] = email_log.template_dynamic_data
 
+        if email_log.extra:
+            message.update(email_log.extra or {})
+
         return {"Messages": [message]}
 
     @classmethod
