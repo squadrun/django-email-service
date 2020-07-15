@@ -37,6 +37,7 @@ class EmailService(object):
         from_email=settings.DEFAULT_FROM_EMAIL,
         from_name=settings.DEFAULT_FROM_NAME,
         email_provider=DEFAULT_EMAIL_PROVIDER,
+        extra: dict = None,
     ):
         provider_class = cls._get_provider_class_for_provider(email_provider)
 
@@ -51,6 +52,7 @@ class EmailService(object):
             body,
             template_id,
             template_dynamic_data,
+            extra
         )
 
         response = provider_class.send_email(email_log)
