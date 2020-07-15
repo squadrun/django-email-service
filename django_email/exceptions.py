@@ -1,0 +1,2 @@
+class EmailActivityTrackerNotFoundException(Exception):
+    pass
