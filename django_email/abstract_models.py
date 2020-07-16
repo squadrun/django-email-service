@@ -45,13 +45,6 @@ class AbstractModel(models.Model):
 
     class Meta:
         abstract = True
-        indexes = [
-            models.Index(
-                fields=["is_active"],
-                condition=Q(is_active=True),
-                name="%(class)s_is_active",
-            )
-        ]
 
     def update_fields(self, **params):
         self.updated_at = timezone.now()
