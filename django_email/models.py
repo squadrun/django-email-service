@@ -62,9 +62,7 @@ class EmailLog(AbstractModel):
         null=True, help_text="Details of error when message sending is failed"
     )
 
-    extra = JSONField(
-        null=True, help_text="Extra parameters passed to the Message object"
-    )
+    reply_to = models.EmailField(null=True, blank=True, help_text="The Reply-to email address")
 
     def __str__(self):
         return f"To: {self.to_emails} Subject:{self.subject}"
@@ -82,7 +80,7 @@ class EmailLog(AbstractModel):
         body,
         template_id,
         template_dynamic_data,
-        extra,
+        reply_to,
     ):
         email_log = cls.objects.create(
             email_provider=email_provider,
@@ -95,7 +93,7 @@ class EmailLog(AbstractModel):
             body=body,
             template_id=template_id,
             template_dynamic_data=template_dynamic_data,
-            extra=extra
+            reply_to=reply_to
         )
 
         return email_log
